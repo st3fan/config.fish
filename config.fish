@@ -53,5 +53,13 @@ if status is-interactive
 
   # Make sure the gpg-agent can find our terminal
   set -gx GPG_TTY (tty)
+
+  # Source in OS specific config
+  switch (uname)
+    case Darwin
+        source (dirname (status --current-filename))/config-macos.fish
+    case Linux
+        source (dirname (status --current-filename))/config-linux.fish
+  end
 end
 

@@ -41,6 +41,10 @@ if status is-interactive
     set -gx PATH $HOME/.emacs.d/bin $PATH
   end
 
+  if test -d $HOME/.poetry/bin
+    set -gx PATH $HOME/.poetry/bin $PATH
+  end
+
   # Prefer Neovim if it is installed
   if type -q nvim
     export VISUAL="nvim"

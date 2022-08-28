@@ -9,7 +9,7 @@ if status is-interactive
 
   if type -q starship
     export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
-    #starship init fish | source
+    starship init fish | source
   end
 end
 

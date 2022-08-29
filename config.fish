@@ -52,6 +52,11 @@ if status is-interactive
     alias vim=nvim
   end
 
+  # Bat is cool
+  if type -q bat
+    export BAT_THEME="Catppuccin-mocha"
+  end
+
   # Do not automatically upgrade anything
   export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
 

@@ -8,23 +8,6 @@ if status is-interactive
   set -gx PATH $PATH /usr/local/bin
   set -gx PATH $PATH /usr/local/sbin
 
-  if test -d /opt/homebrew/bin
-    set -gx PATH /opt/homebrew/bin $PATH
-  end
-
-  # Because Homebrew defaults to Python 3.9
-  if test -d /opt/homebrew/opt/python@3.10/bin
-    set -gx PATH /opt/homebrew/opt/python@3.10/bin $PATH
-  end
-
-  if test -d /opt/homebrew/opt/ruby/bin
-    set -gx PATH /opt/homebrew/opt/ruby/bin $PATH
-  end
-
-  if test -d /opt/homebrew/lib/ruby/gems/3.1.0/bin
-    set -gx PATH /opt/homebrew/lib/ruby/gems/3.1.0/bin $PATH
-  end
-
   if test -d /usr/local/go
     set -gx PATH /usr/local/go/bin $PATH
   end
@@ -45,6 +28,14 @@ if status is-interactive
     set -gx PATH $HOME/.poetry/bin $PATH
   end
 
+  if test -d $HOME/.deta/bin
+    set -gx PATH $HOME/.deta/bin $PATH
+  end
+
+  if test -d $HOME/.local/bin
+    set -gx PATH $HOME/.local/bin $PATH
+  end
+
   # Prefer Neovim if it is installed
   if type -q nvim
     export VISUAL="nvim"
@@ -57,11 +48,17 @@ if status is-interactive
     export BAT_THEME="Catppuccin-mocha"
   end
 
-  # Do not automatically upgrade anything
-  export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
+  if type -q rbenv
+    status --is-interactive; and rbenv init - fish | source
+  end
 
   # Make sure the gpg-agent can find our terminal
   set -gx GPG_TTY (tty)
+
+  # Source in 1Password plugins
+  if test -f ~/.config/op/plugins.sh
+    source ~/.config/op/plugins.sh
+  end
 
   # Source in OS specific config
   switch (uname)
@@ -71,4 +68,7 @@ if status is-interactive
         source (dirname (status --current-filename))/config-linux.fish
   end
 end
+
+# Disable AWS SAM CLI Telemetry
+export SAM_CLI_TELEMETRY=0
 

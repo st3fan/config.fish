@@ -3,5 +3,5 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/
 
 # TODO Do something smart here to switch between Latte and Mocha
-fish_config theme save "Catppuccin Latte"
+fish_config theme choose "Catppuccin Latte"
 

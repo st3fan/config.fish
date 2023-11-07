@@ -29,8 +29,8 @@ if status is-interactive
     set -gx PATH /opt/homebrew/opt/ruby/bin $PATH
   end
 
-  if test -d /opt/homebrew/lib/ruby/gems/3.1.0/bin
-    set -gx PATH /opt/homebrew/lib/ruby/gems/3.1.0/bin $PATH
+  if test -d /opt/homebrew/lib/ruby/gems/3.2.0/bin
+    set -gx PATH /opt/homebrew/lib/ruby/gems/3.2.0/bin $PATH
   end
 
   # No automatic clean up after install

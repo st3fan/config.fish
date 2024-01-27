@@ -4,7 +4,7 @@
 
 
 if status is-interactive
-  if test "$LC_TERMINAL" = "iTerm2"
-    export TERM=xterm-24bit
-  end
+#  if test "$LC_TERMINAL" = "iTerm2"
+#    export TERM=xterm-24bit
+#  end
 end

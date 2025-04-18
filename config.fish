@@ -55,19 +55,37 @@ if status is-interactive
     # Make sure the gpg-agent can find our terminal
     set -gx GPG_TTY (tty)
 
-    # Source in 1Password plugins
-    if test -f ~/.config/op/plugins.sh
-        source ~/.config/op/plugins.sh
-    end
-
     # Source in OS specific config
     switch (uname)
         case Darwin
-            source (dirname (status --current-filename))/config-macos.fish
+            if test -f (dirname (status --current-filename))/config-macos.fish
+                source (dirname (status --current-filename))/config-macos.fish
+            end
+            for file in (dirname (status --current-filename))/config-macos.d/*.fish
+                if test -f $file
+                    source $file
+                end
+            end
         case Linux
-            source (dirname (status --current-filename))/config-linux.fish
+            if test -f (dirname (status --current-filename))/config-linux.fish
+                source (dirname (status --current-filename))/config-linux.fish
+            end
+            for file in (dirname (status --current-filename))/config-linux.d/*.fish
+                if test -f $file
+                    source $file
+                end
+            end
+    end
+
+    # Source in common configs
+    for file in (dirname (status --current-filename))/config.d/*.fish
+        if test -f $file
+            source $file
+        end
+    end
+
+    # Source in machine local config
+    if test -f (dirname (status --current-filename))/config-local.fish
+        source (dirname (status --current-filename))/config-local.fish
     end
 end
-
-# Disable AWS SAM CLI Telemetry
-export SAM_CLI_TELEMETRY=0

@@ -16,10 +16,11 @@ if status is-interactive
     set -gx PATH /opt/homebrew/bin $PATH
   end
 
-  # Because Homebrew defaults to Python 3.9?
-  if test -d /opt/homebrew/opt/python@3.11/libexec/bin
-    set -gx PATH /opt/homebrew/opt/python@3.11/libexec/bin $PATH
-  end
+  # We prefer a newer Python to be default
+#  set MY_PREFERRED_PYTHON 3.12
+#  if test -d $(brew --prefix "python@$MY_PREFERRED_PYTHON")/bin
+#    set -gx PATH $(brew --prefix "python@$MY_PREFERRED_PYTHON")/bin $PATH
+#  end
 
   if test -d /opt/homebrew/opt/openjdk@17/bin
     set -gx PATH /opt/homebrew/opt/openjdk@17/bin $PATH
